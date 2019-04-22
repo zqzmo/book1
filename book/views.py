@@ -6,7 +6,7 @@ from  book import douban
 def openbook(request):
     flag=0
     a,b,c,d=douban.getdetiles()
-    ls=models.bookdetils.objects.all()
+    ls = models.bookdetils.objects.all()
     for i in ls :
         if(i.id==1):
             flag=1
@@ -14,5 +14,5 @@ def openbook(request):
     if(flag==0):
         for i in range(len(a)):
             models.bookdetils.objects.create(id=i,title=a[i],tiems=b[i],detile=d[i],imgs=c[i])
-
+    ls = models.bookdetils.objects.all()
     return render(request,'index.html',{'li':ls})
