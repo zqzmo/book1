@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+import pymysql
 def getdetiles():
     ls = []
     lh = []
@@ -15,10 +16,21 @@ def getdetiles():
 
         for i in l:
             ls.append((i.h2.text.replace('\n','').replace(' ','')))
-            lh.append( i.find('div',class_='pub').text.strip())
+            lh.append( i.find('div',class_='pub').text.strip().replace("'",""))
 
-            lk.append(i.img['src'])
-            lp.append(i.p.text)
+            lk.append(i.img['src'].replace("'",""))
+            lp.append(i.p.text.replace("'",""))
 
     return ls,lh,lk,lp
-getdetiles()
+l1,l2,l3,l4=getdetiles()
+db = pymysql.connect("localhost", "root", "admin", "123", charset="utf8")
+cs = db.cursor()
+for i in range(len(l1)):
+
+
+    sql = "insert into py(title,times,detile,imgs) values('{0}','{1}','{2}','{3}')".format(l1[i],l2[i],l4[i],l3[i])
+
+    cs.execute(sql)
+    db.commit()
+db.close()
+
