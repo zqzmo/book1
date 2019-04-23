@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta name="referrer" content="no-referrer">
     <title>小书屋</title>
 <link rel="stylesheet" href="../static/css/one.css">
 </head>
@@ -110,7 +110,7 @@ background-color:#f5fafe;
 
 <table border="2">
 
-    <tr><h1 >好看的书都在这，请往下看！</h1></tr>
+    <tr><h1 >好看的书都在这，请往右看！</h1></tr>
 
    <td>
     {% for i in li %}
@@ -118,7 +118,7 @@ background-color:#f5fafe;
 <table border="2" class="table">
     <th><h3>{{ i.title }}</h3></th>
    <th><h5>作者：{{ i.tiems }}</h5>
-   <img src={{ i.imgs }} width="90" ></th>
+   <img src="{{ i.imgs }}" width="90" ></th>
    <td><p>简介：{{ i.detile }}</p></td>
 </table>
 
