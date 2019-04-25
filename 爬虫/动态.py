@@ -30,6 +30,7 @@ def seach():#搜索
 
 
 def getrouser():#爬虫
+    print('爬虫开始！')
     wait.until(ec.presence_of_element_located((By.CSS_SELECTOR,"#J_main > div.m-list")))
     time.sleep(1)
     for i in range(0, 10):
@@ -56,9 +57,12 @@ def getrouser():#爬虫
         a3.append(i.em.text)
     for i in l4:
         a4.append(i.a['title'])
+    print('爬虫结束！')
     return a1,a2,a3,a4
 
 def main():
+    #获得数据插入数据库
+    print('开始插入数据库！')
     l1, l2, l3, l4 = seach()
     db = pymysql.connect("localhost", "root", "admin", "123", charset="utf8")
     cs = db.cursor()
@@ -68,6 +72,7 @@ def main():
         cs.execute(sql)
         db.commit()
     db.close()
+    print('插入数据库结束')
 if __name__ == '__main__':
     main()
 

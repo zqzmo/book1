@@ -1,12 +1,12 @@
 import requests
 from bs4 import BeautifulSoup
 import pymysql
-def getdetiles():
+def getdetiles():#爬虫函数
     ls = []
     lh = []
     lk = []
     lp = []
-    for i in range(0,60,20):
+    for i in range(0,100,20):
         link='https://book.douban.com/tag/%E5%B0%8F%E8%AF%B4?start={0}&type=T'.format(i)
         links=link
         head={'User-Agent':'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 SE 2.X MetaSr 1.0'}
@@ -23,6 +23,7 @@ def getdetiles():
 
     return ls,lh,lk,lp
 l1,l2,l3,l4=getdetiles()
+#获得数据插入数据
 db = pymysql.connect("localhost", "root", "admin", "123", charset="utf8")
 cs = db.cursor()
 for i in range(len(l1)):
@@ -32,5 +33,6 @@ for i in range(len(l1)):
 
     cs.execute(sql)
     db.commit()
+print('数据插入完成')
 db.close()
 
